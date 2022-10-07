@@ -27,16 +27,6 @@ namespace School.Data
                 .HasOne(e => e.Course)
                 .WithMany(c => c.Enrollments)
                 .HasForeignKey(e => e.CourseID);
-
-            //modelBuilder.Entity<Course>()
-            //    .HasMany(c => c.Enrollments)
-            //    .WithOne(e => e.Course)
-            //    .HasForeignKey(e => e.CourseID);
-                      
-            //modelBuilder.Entity<Student>()
-            //    .HasMany(s => s.Enrollments)
-            //    .WithOne(e => e.Student)
-            //    .HasForeignKey(e => e.StudentID);
         }
     }
 }
