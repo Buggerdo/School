@@ -29,7 +29,7 @@ namespace School.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("Teacher")
+                    b.Property<string>("Teacher")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 

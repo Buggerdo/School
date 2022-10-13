@@ -1,10 +1,14 @@
-﻿using School.Data;
+﻿using Newtonsoft.Json.Linq;
+using School.Data;
+using School.Data.DTOs;
 using School.Data.TableModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace School.Services.Services
 {
@@ -14,6 +18,7 @@ namespace School.Services.Services
         ICollection<Student> GetStudents();
         Student GetStudentById(int id);      
         Student UpdateStudent(Student student, string name);
+        Task<Student> CreateRandomStudent();
         bool DeleteStudent(int id);
     }
 
@@ -21,10 +26,12 @@ namespace School.Services.Services
     public class StudentService : IStudentService
     {
         private readonly SchoolDbContext _context;
+        private readonly HttpClient _client;
 
-        public StudentService(SchoolDbContext context)
+        public StudentService(SchoolDbContext context, HttpClient client)
         {
             _context = context;
+            _client = client;
         }
 
         public Student CreateStudent(string name)
@@ -39,7 +46,23 @@ namespace School.Services.Services
 
             return student;
         }
+        
+        // create random student using http client
+        public async Task<Student> CreateRandomStudent()
+        {
+            var nameFakePerson = await _client.GetFromJsonAsync<NameFakePerson>("https://api.namefake.com/");
+                      
+            var student = new Student
+            {
+                Name = nameFakePerson.name
+            };
 
+            _context.Students.Add(student);
+            _context.SaveChanges();
+        
+            return student;
+        }
+        
         public ICollection<Student> GetStudents()
         {
             return _context.Students.ToList();
@@ -60,6 +83,8 @@ namespace School.Services.Services
             return student;
         } 
         
+
+        
         public bool DeleteStudent(int id)
         {
             var student = _context.Students.Find(id);
@@ -74,5 +99,8 @@ namespace School.Services.Services
 
             return true;
         }
+
+ 
+
     }
 }

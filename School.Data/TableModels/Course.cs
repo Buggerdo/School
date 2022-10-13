@@ -17,7 +17,7 @@ namespace School.Data.TableModels
         public string Title { get; set; }
         
         [StringLength(50)]
-        public int Teacher { get; set; }
+        public string Teacher { get; set; }
 
         public virtual ICollection<Enrollment> Enrollments { get; set; }
 

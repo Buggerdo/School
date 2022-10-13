@@ -34,13 +34,27 @@ namespace School.Api.Controllers
             return Ok(course);
         }
 
+        // GetStudentsForCourseId
+        [HttpGet("studentlist/{id}")]
+        public ActionResult GetStudentsList(int id)
+        {
+            var csl = _service.GetStudentsForCourseId(id);
+            if(csl == null) return NotFound("There is no course with an ID of " + id);
+            return Ok(csl);
+        }
+
         // POST api/<CoursesController>
         [HttpPost]
-        public ActionResult Post(string title, int teacher)
+        public ActionResult Post(string title, string teacher)
         {
             return Ok(_service.CreateCourse(title, teacher));
         }
-        
+
+        // post random student using http client
+        //[HttpPost("randomstudent")]
+
+
+
         //// PUT api/<CoursesController>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)
@@ -52,6 +66,5 @@ namespace School.Api.Controllers
         //public void Delete(int id)
         //{
         //}
-
     }
 }

@@ -41,6 +41,32 @@ namespace School.Api.Controllers
             return Ok(_service.CreateStudent(name));
         }
 
+        // post random student using http client
+        [HttpPost("random")]
+        public async Task<ActionResult> Post()
+        {
+            var student = await _service.CreateRandomStudent();
+            if(student == null)
+            {
+                return StatusCode(500, "Something went wrong");
+            }
+            return Ok(student);
+        }
+
+        
+
+
+
+
+
+
+        
+
+
+
+
+
+
         //// PUT api/<StudentsController>/5
         //[HttpPut("{id}")]
         //public Student Put(Student student, string name)

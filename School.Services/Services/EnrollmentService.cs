@@ -47,6 +47,7 @@ namespace School.Services.Services
 
         public ICollection<Enrollment> GetEnrollmentsByStudentId(int id)
         {
+            
             var e = _context.Enrollments.Include(e => e.Course)
                 .Where(e => e.StudentID == id)
                 .ToList();
