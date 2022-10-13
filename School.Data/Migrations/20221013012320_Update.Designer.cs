@@ -11,8 +11,8 @@ using School.Data;
 namespace School.Data.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20221006235450_InitializeDatabase")]
-    partial class InitializeDatabase
+    [Migration("20221013012320_Update")]
+    partial class Update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,9 +31,10 @@ namespace School.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("Teacher")
+                    b.Property<string>("Teacher")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Title")
                         .IsRequired()

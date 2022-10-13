@@ -50,17 +50,14 @@ namespace School.Api.Controllers
             return Ok(_service.CreateEnrollment(courseId, enrollmentId));
         }
 
-        //// PUT api/<EnrollmentsController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<EnrollmentsController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        // delete enrolment
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            var enrollment = _service.DeleteEnrollment(id);
+            if(enrollment == null) return NotFound("There is no enrollment with an ID of " + id);
+            return Ok(enrollment);
+        }
 
     }
 }

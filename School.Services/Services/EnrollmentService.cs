@@ -10,6 +10,7 @@ namespace School.Services.Services
         ICollection<Enrollment> GetEnrollments();
         Enrollment? GetEnrollmentById(int id);
         ICollection<Enrollment> GetEnrollmentsByStudentId(int id);
+        Enrollment DeleteEnrollment(int id);
     }
 
 
@@ -54,6 +55,13 @@ namespace School.Services.Services
             return e;
         }
 
+        Enrollment IEnrollmentService.DeleteEnrollment(int id)
+        {
+            Enrollment enrollment = _context.Enrollments.SingleOrDefault(e => e.ID == id);
+            _context.Enrollments.Remove(enrollment);
+            _context.SaveChanges();
+            return enrollment;
+        }
     }
 }
 

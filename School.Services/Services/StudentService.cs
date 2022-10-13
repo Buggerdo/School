@@ -20,6 +20,7 @@ namespace School.Services.Services
         Student UpdateStudent(Student student, string name);
         Task<Student> CreateRandomStudent();
         bool DeleteStudent(int id);
+        Student UpdateStudentName(int id, string name);
     }
 
 
@@ -87,7 +88,7 @@ namespace School.Services.Services
         
         public bool DeleteStudent(int id)
         {
-            var student = _context.Students.Find(id);
+            var student = GetStudentById(id);
 
             if(student == null)
             {
@@ -100,7 +101,21 @@ namespace School.Services.Services
             return true;
         }
 
- 
+        Student IStudentService.UpdateStudentName(int id, string name)
+        {
+            var student = GetStudentById(id);
 
+            if(student == null)
+            {
+                return null;
+            }
+
+            student.Name = name;
+
+            _context.Students.Update(student);
+            _context.SaveChanges();
+
+            return student;
+        }
     }
 }

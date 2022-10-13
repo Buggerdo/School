@@ -60,8 +60,6 @@ namespace School.Services.Services
 
             //return csl;
 
-
-
             return _context.Courses.Where(c => c.ID == id)
                 .Select(c => new CourseStudentList()
                 {
@@ -72,5 +70,6 @@ namespace School.Services.Services
                 }).FirstOrDefault();
 
         }
+
     }
 }

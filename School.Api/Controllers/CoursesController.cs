@@ -49,22 +49,5 @@ namespace School.Api.Controllers
         {
             return Ok(_service.CreateCourse(title, teacher));
         }
-
-        // post random student using http client
-        //[HttpPost("randomstudent")]
-
-
-
-        //// PUT api/<CoursesController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<CoursesController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

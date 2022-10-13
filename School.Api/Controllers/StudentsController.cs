@@ -53,32 +53,23 @@ namespace School.Api.Controllers
             return Ok(student);
         }
 
-        
 
+        // update student name
+        [HttpPut("{id}")]
+        public ActionResult Put(int id, string name)
+        {
+            var student = _service.UpdateStudentName(id, name);
+            if(student == null) return NotFound("There is no student with an id of " + id);
+            return Ok(student);
+        }
 
-
-
-
-
-        
-
-
-
-
-
-
-        //// PUT api/<StudentsController>/5
-        //[HttpPut("{id}")]
-        //public Student Put(Student student, string name)
-        //{
-        //    return _service.UpdateStudent(student, name);
-        //}
-
-        //// DELETE api/<StudentsController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //    _service.DeleteStudent(id);
-        //}
+        //delete student
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            var student = _service.DeleteStudent(id);
+            if(student == false) return NotFound("There is no student with an id of " + id);
+            return Ok("Student with id " + id + " was deleted");
+        }
     }
 }
