@@ -11,6 +11,7 @@ namespace School.Services.Services
         Enrollment? GetEnrollmentById(int id);
         ICollection<Enrollment> GetEnrollmentsByStudentId(int id);
         Enrollment DeleteEnrollment(int id);
+        ICollection<string> GetTeachers();
     }
 
 
@@ -61,6 +62,11 @@ namespace School.Services.Services
             _context.Enrollments.Remove(enrollment);
             _context.SaveChanges();
             return enrollment;
+        }
+
+        ICollection<string> IEnrollmentService.GetTeachers()
+        {
+            return _context.Courses.Select(c => c.Teacher).Distinct().ToList();
         }
     }
 }

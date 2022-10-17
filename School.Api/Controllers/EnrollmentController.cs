@@ -59,5 +59,13 @@ namespace School.Api.Controllers
             return Ok(enrollment);
         }
 
+        // get all teachers
+        [HttpGet("teachers")]
+        public ActionResult GetTeachers()
+        {
+            var teachers = _service.GetTeachers();
+            return Ok(teachers);
+        }
+
     }
 }
